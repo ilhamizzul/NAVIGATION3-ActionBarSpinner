@@ -44,11 +44,14 @@ public class MainActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // When the given dropdown item is selected, show its contents in the
-                // container view.
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                        .commit();
+                Fragment fragment;
+                if (position == 1) {
+                    fragment = new Section2Fragment();
+                } else {
+                    fragment = PlaceholderFragment.newInstance(position + 1);
+                }
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commitNow();
             }
 
             @Override
